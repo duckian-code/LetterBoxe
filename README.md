@@ -1,2 +1,2 @@
-# CouchPotato
-A simple NodeJS self hosted media player server.
+# LetterBoxe
+A simple NodeJS educational clone of LetterBoxd.
