@@ -137,3 +137,10 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+workspace.xml
+vcs.xml
+.gitignore
+modules.xml
+Letterboxe.iml
+node_modules
