@@ -14,6 +14,22 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded());
 
+app.locals.popularMovies = [
+    { title: "Dune: Part Two", year: 2024 },
+    { title: "The Holdovers", year: 2023 },
+    { title: "Oppenheimer", year: 2023 },
+    { title: "Past Lives", year: 2023 },
+    { title: "Spider-Man: Across the Spider-Verse", year: 2023 },
+];
+
+app.locals.popularReviews = [
+    { title: "Dune: Part Two", author: "Ava M.", snippet: "A massive, elegant sci-fi epic." },
+    { title: "The Holdovers", author: "Jules R.", snippet: "Warm, funny, and quietly moving." },
+    { title: "Oppenheimer", author: "Priya S.", snippet: "Tense and mesmerizing from start to end." },
+    { title: "Past Lives", author: "Marco L.", snippet: "A tender story that lingers." },
+    { title: "Across the Spider-Verse", author: "Nina K.", snippet: "Inventive visuals and huge heart." },
+];
+
 
 app.get("/", (req, res) => {
     res.render("index");

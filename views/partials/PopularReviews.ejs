@@ -1,0 +1,23 @@
+<section class="popular-reviews">
+    <div class="popular-reviews__header">
+        <h2>Popular Reviews</h2>
+        <p>What people are saying.</p>
+    </div>
+    <ol class="popular-reviews__list">
+        <% if (popularReviews && popularReviews.length) { %>
+            <% popularReviews.forEach((review) => { %>
+                <li class="popular-reviews__item">
+                    <div>
+                        <div class="popular-reviews__title"><%= review.title %></div>
+                        <div class="popular-reviews__snippet"><%= review.snippet %></div>
+                    </div>
+                    <span class="popular-reviews__author">- <%= review.author %></span>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <li class="popular-reviews__item">
+                <div class="popular-reviews__title">No popular reviews yet.</div>
+            </li>
+        <% } %>
+    </ol>
+</section>
