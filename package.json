@@ -16,6 +16,11 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "devDependencies": {
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11"
+  },
   "bugs": {
     "url": "https://github.com/duckian-code/LetterBoxe/issues"
   },
