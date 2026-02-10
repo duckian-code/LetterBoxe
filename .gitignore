@@ -140,7 +140,6 @@ vite.config.ts.timestamp-*
 
 workspace.xml
 vcs.xml
-.gitignore
 modules.xml
 Letterboxe.iml
 node_modules
