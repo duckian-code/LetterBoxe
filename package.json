@@ -1,0 +1,23 @@
+{
+  "name": "letterboxe",
+  "version": "1.0.0",
+  "description": "A simple NodeJS educational clone of LetterBoxd. This application is built using NodeJS, TypeScript, Express, NestJS, React, and PostgreSQL (with Drizzle).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duckian-code/LetterBoxe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/duckian-code/LetterBoxe/issues"
+  },
+  "homepage": "https://github.com/duckian-code/LetterBoxe#readme"
+
