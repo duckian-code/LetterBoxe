@@ -1,0 +1,20 @@
+<section class="popular-movies">
+    <div class="popular-movies__header">
+        <h2>Popular Movies</h2>
+        <p>Trending picks right now.</p>
+    </div>
+    <ol class="popular-movies__list">
+        <% if (popularMovies && popularMovies.length) { %>
+            <% popularMovies.forEach((movie) => { %>
+                <li class="popular-movies__item">
+                    <span class="popular-movies__title"><%= movie.title %></span>
+                    <span class="popular-movies__year"><%= movie.year %></span>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <li class="popular-movies__item">
+                <span class="popular-movies__title">No popular movies yet.</span>
+            </li>
+        <% } %>
+    </ol>
+</section>
