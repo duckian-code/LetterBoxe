@@ -40,3 +40,5 @@ async function getMovies(category) {
         console.error("ERROR FETCHING MOVIES: " + error);
     }
 }
+
+console.log(getMovies("popular"));
