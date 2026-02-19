@@ -1,0 +1,9 @@
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: reviews
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: abc123
