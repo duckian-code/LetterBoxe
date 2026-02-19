@@ -7,27 +7,34 @@ export const usersTable = pgTable("users", {
     createdAt: varchar({ length: 255 }).notNull(),
 });
 
-export const filmsTable = pgTable("films", {
+export const userLikesTable = pgTable("user_likes", {
+    userId: integer().notNull().unique(),
+    filmId: integer().notNull().unique(),
+    createdAt: varchar({ length: 255 }).notNull(),
+});
+
+export const userWatchlistTable = pgTable("user_watchlist", {
+    userId: integer().notNull().unique(),
+    filmId: integer().notNull().unique(),
+    createdAt: varchar({ length: 255 }).notNull(),
+});
+
+export const userWatchedTable = pgTable("user_watched", {
+    userId: integer().notNull().unique(),
+    filmId: integer().notNull().unique(),
+    watchedAt: varchar({ length: 255 }).notNull(),
+});
+
+export const userReviews = pgTable("user_reviews", {
+    userId: integer().notNull().unique(),
+    filmId: integer().notNull().unique(),
+    createdAt: varchar({ length: 255 }).notNull(),
+});
+
+export const reviews = pgTable("reviews", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
-    title: varchar({ length: 255 }).notNull(),
-    year: integer().notNull(),
-    posterUrl: varchar({ length: 255 }).notNull(),
+    userId: integer().notNull().unique(),
+    rating: integer().notNull(),
+    content: varchar({ length: 255 }).notNull(),
     createdAt: varchar({ length: 255 }).notNull(),
 });
-
-export const userLikes = pgTable("user_likes", {
-    userId: integer().notNull().unique(),
-    filmId: integer().notNull().unique(),
-    createdAt: varchar({ length: 255 }).notNull(),
-});
-
-export const userWatchlist = pgTable("user_watchlist", {
-    userId: integer().notNull().unique(),
-    filmId: integer().notNull().unique(),
-    createdAt: varchar({ length: 255 }).notNull(),
-});
-
-export const userWatched = pgTable("user_watched", {
-    userId: integer().notNull().unique(),
-    watchDate: varchar({ length: 255 }).notNull(),
-})
