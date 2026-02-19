@@ -17,23 +17,22 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "@types/node": "^25.2.2",
     "@types/pg": "^8.16.0",
     "drizzle-kit": "^0.31.9",
     "ejs": "^4.0.1",
     "express": "^5.2.1",
     "nodemon": "^3.1.11",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "tsx": "^4.21.0"
   },
   "bugs": {
     "url": "https://github.com/duckian-code/LetterBoxe/issues"
   },
   "homepage": "https://github.com/duckian-code/LetterBoxe#readme",
   "dependencies": {
-    "dotenv": "^17.2.4",
+    "@types/typescript": "^2.0.0",
+    "dotenv": "^17.3.1",
     "drizzle-orm": "^0.45.1",
-    "pg": "^8.18.0"
+    "pg": "^8.18.0",
+    "typescript": "^5.9.3"
   }
 }

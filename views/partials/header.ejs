@@ -1,0 +1,29 @@
+<header class="site-header">
+    <nav class="nav">
+        <a href="/" class="logo">Letterboxe</a>
+
+        <ul class="nav-links">
+            <li>
+                <a href="/movies.ejs">Movies</a>
+            </li>
+
+
+            <!-- add !user when user model is actually made -->
+            <% if (true) { %>
+                <li>
+                    <a href="/login">Login</a>
+                </li>
+                <li>
+                    <a href="/signup">Sign Up</a>
+                </li>
+            <% } else { %>
+                <li>
+                    <a href="/profile">Profile</a>
+                </li>
+                <li>
+                    <a href="/logout">Logout</a>
+                </li>
+            <% } %>
+        </ul>
+    </nav>
+</header>

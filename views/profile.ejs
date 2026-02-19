@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title><%= profile.username %> — LetterBoxe</title>
+  <link rel="stylesheet" href="/css/site.css" />
+  <script defer src="/public/js/main.js"></script>
+</head>
+<body>
+
+  <%- include('partials/header', { user: currentUser }) %>
+
+  <div class="profile-header">
+    <img src="<%= profile.avatar %>" class="profile-avatar" alt="<%= profile.username %>" />
+    <div class="profile-info">
+      <h1><%= profile.username %></h1>
+      <div class="profile-stats">
+        <div class="stat"><span class="stat-val"><%= profile.watchedCount || 0 %></span><span class="stat-label">films</span></div>
+        <div class="stat"><span class="stat-val"><%= profile.followers || 0 %></span><span class="stat-label">followers</span></div>
+        <div class="stat"><span class="stat-val"><%= profile.following || 0 %></span><span class="stat-label">following</span></div>
+      </div>
+      <% if (currentUser && profile.username !== currentUser.username) { %>
+        <button class="action-btn follow-btn">Follow</button>
+      <% } else if (currentUser) { %>
+        <a href="/settings" class="action-btn">Edit Profile</a>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="profile-body">
+
+    <div class="profile-section">
+      <h2>Favourite Films</h2>
+      <% if (profile.favorites && profile.favorites.length) { %>
+        <div class="film-row">
+          <% profile.favorites.forEach(movie => { %>
+            <div class="film-card">
+              <img src="<%= movie.poster %>" alt="<%= movie.title %>">
+              <p><%= movie.title %></p>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p class="empty-state">No favourites yet.</p>
+      <% } %>
+    </div>
+
+    <div class="profile-section">
+      <h2>Recent Activity</h2>
+      <% if (profile.recentActivity && profile.recentActivity.length) { %>
+        <div class="activity-feed">
+          <% profile.recentActivity.forEach(item => { %>
+            <div class="activity-item">
+              <img src="<%= item.poster %>" alt="<%= item.title %>" class="activity-poster" />
+              <div class="activity-text">
+                <span class="activity-title"><%= item.title %></span>
+                <span class="activity-type"><%= item.type %></span>
+                <% if (item.rating) { %><span class="activity-rating">⭐ <%= item.rating %></span><% } %>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p class="empty-state">No activity yet.</p>
+      <% } %>
+    </div>
+
+    <div class="profile-section">
+      <h2>Watchlist</h2>
+      <% if (profile.watchlist && profile.watchlist.length) { %>
+        <div class="film-row">
+          <% profile.watchlist.forEach(movie => { %>
+            <div class="film-card">
+              <img src="<%= movie.poster %>" alt="<%= movie.title %>">
+              <p><%= movie.title %></p>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p class="empty-state">Nothing on the watchlist yet.</p>
+      <% } %>
+    </div>
+
+    <div class="profile-section">
+      <h2>Liked Movies</h2>
+      <% if (profile.liked && profile.liked.length) { %>
+        <div class="film-row">
+          <% profile.liked.forEach(movie => { %>
+            <div class="film-card">
+              <img src="<%= movie.poster %>" alt="<%= movie.title %>">
+              <p><%= movie.title %></p>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p class="empty-state">No liked movies yet.</p>
+      <% } %>
+    </div>
+
+  </div>
+
+  <%- include('partials/footer') %>
+
+</body>
+</html>
