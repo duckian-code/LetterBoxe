@@ -34,7 +34,7 @@ async function getMovies(category) {
             poster: `${IMAGE_BASE_URL}${movie.poster_path}`,
             rating: movie.vote_average, // TODO: replace built in rating with API ratings
             releaseDate: movie.release_date,
-            description: movie.overview.substring(0, 100) + '...' // Fancy lil truncation for the description
+            description: movie.overview
         }));
     } catch (error) {
         console.error("ERROR FETCHING MOVIES: " + error);

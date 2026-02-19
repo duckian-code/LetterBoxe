@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <%- include('partials/header', { user: currentUser }) %>
+  <%- include('partials/header') %>
 
   <section class="hero">
     <h1>Discover. Rate. React.</h1>
@@ -42,41 +42,8 @@
     </div>
   </section>
 
-  <section class="movie-section">
-    <h2>Popular Right Now</h2>
-    <div class="film-row">
-      <% popularMovies.forEach(movie => { %>
-        <div class="film-card">
-          <img src="<%= movie.poster %>" alt="<%= movie.title %>">
-          <p><%= movie.title %></p>
-          <span class="rating-tag">⭐ <%= movie.avgRating %></span>
-        </div>
-      <% }) %>
-    </div>
-  </section>
-
-  <section class="review-section">
-    <h2>Popular Reviews</h2>
-    <div class="review-grid">
-      <% popularReviews.forEach(review => { %>
-        <div class="review-card">
-          <div class="review-meta">
-            <a href="/profile/<%= review.user.username %>" class="reviewer-link">
-              <img src="<%= review.user.avatar %>" class="reviewer-avatar" />
-              <span><%= review.user.username %></span>
-            </a>
-            <span class="review-movie-title"><%= review.movie.title %></span>
-          </div>
-          <p class="review-snippet"><%= review.text.substring(0, 150) %>...</p>
-          <button class="expand-review">Read More</button>
-          <div class="review-actions">
-            <span><%= review.likes %></span>
-            <span><%= review.comments %></span>
-          </div>
-        </div>
-      <% }) %>
-    </div>
-  </section>
+  <%- include('partials/PopularMovies') %>
+  <%- include('partials/PopularReviews') %>
   <%- include('partials/footer') %>
 
 </body>
