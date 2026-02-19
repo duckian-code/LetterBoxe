@@ -1,11 +1,10 @@
 const express = require("express");
-const fs = require("fs/promises");
-const path = require("path");
+import 'dotenv/config';
+import { drizzle } from 'drizzle-orm/node-postgres';
+const db = drizzle(process.env.DATABASE_URL);
 
 const app = express();
 const PORT = 3001;
-const DATA_DIR = path.join(__dirname, "data");
-const DATA_PATH = path.join(DATA_DIR, "film_submissions.json");
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
