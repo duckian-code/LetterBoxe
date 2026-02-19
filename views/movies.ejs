@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Movies — LetterBoxe</title>
+    <link rel="stylesheet" href="/css/site.css" />
+    <script defer src="/js/main.js"></script>
+</head>
+<body>
+
+    <%- include('partials/header', { user: currentUser }) %>
+
+    <div class="movies-page">
+        <h1>All Movies</h1>
+        <div class="movies-grid">
+            <% movies.forEach(movie => { %>
+                <a href="/film/<%= movie._id %>" class="film-card">
+                    <img src="<%= movie.poster %>" alt="<%= movie.title %>">
+                    <p><%= movie.title %></p>
+                    <span class="film-year"><%= movie.year %></span>
+                </a>
+            <% }) %>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>

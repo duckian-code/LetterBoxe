@@ -1,18 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Movies</title>
-    <link rel="stylesheet" href="/css/site.css">
+  <meta charset="UTF-8" />
+  <title>Film — LetterBoxe</title>
+  <link rel="stylesheet" href="/css/site.css" />
+  <script defer src="/public/js/main.js"></script>
 </head>
 <body>
-<%- include('partials/header') %>
 
-<main>
-    <h1>Movies</h1>
-</main>
+  <%- include('partials/header', { user: currentUser }) %>
 
-<%- include('partials/footer.ejs') %>
+  <div class="film-hero">
+    <img src="<%= movie.poster %>" class="film-poster" alt="<%= movie.title %>" />
+    <div class="film-details">
+      <h1><%= movie.title %></h1>
+      <p class="film-meta">
+        <span><%= movie.year %></span>
+        <% if (movie.director) { %><span><%= movie.director %></span><% } %>
+        <% if (movie.runtime) { %><span><%= movie.runtime %> min</span><% } %>
+      </p>
+      <% if (movie.genres) { %>
+        <div class="genre-tags">
+          <% movie.genres.forEach(g => { %><span class="tag"><%= g %></span><% }) %>
+        </div>
+      <% } %>
+      <p class="film-synopsis"><%= movie.synopsis %></p>
+      <div class="film-actions">
+        <div class="star-rating" data-movie-id="<%= movie._id %>">
+          <% for (let i = 1; i <= 5; i++) { %>
+            <span class="star <%= i <= (movie.userRating || 0) ? 'active' : '' %>" data-val="<%= i %>">★</span>
+          <% } %>
+        </div>
+        <button class="action-btn watchlist-btn">+ Watchlist</button>
+        <button class="action-btn watched-btn">Watched</button>
+      </div>
+      <div class="film-stats">
+        <div class="stat"><span class="stat-val"><%= movie.avgRating || '—' %></span><span class="stat-label">avg rating</span></div>
+        <div class="stat"><span class="stat-val"><%= movie.watchCount || 0 %></span><span class="stat-label">watched</span></div>
+        <div class="stat"><span class="stat-val"><%= movie.listCount || 0 %></span><span class="stat-label">lists</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="film-body">
+
+    <div class="film-reviews">
+      <h2>Reviews</h2>
+      <% if (movie.reviews && movie.reviews.length) { %>
+        <div class="review-grid">
+          <% movie.reviews.forEach(review => { %>
+            <div class="review-card">
+              <div class="review-meta">
+                <a href="/profile/<%= review.user.username %>" class="reviewer-link">
+                  <img src="<%= review.user.avatar %>" class="reviewer-avatar" />
+                  <span><%= review.user.username %></span>
+                </a>
+                <span class="rating-tag">⭐ <%= review.rating %></span>
+              </div>
+              <p class="review-snippet"><%= review.text.substring(0, 150) %>...</p>
+              <button class="expand-review">Read More</button>
+              <div class="review-actions">
+                <span><%= review.likes %></span>
+                <span><%= review.comments %></span>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p class="empty-state">No reviews yet. Be the first.</p>
+      <% } %>
+
+      <div class="write-review">
+        <h3>Leave a Review</h3>
+        <textarea class="review-input" placeholder="What did you think?"></textarea>
+        <button class="cta-btn">Submit</button>
+      </div>
+    </div>
+
+    <% if (movie.similar && movie.similar.length) { %>
+      <div class="similar-section">
+        <h2>More Like This</h2>
+        <div class="film-row">
+          <% movie.similar.forEach(m => { %>
+            <div class="film-card">
+              <img src="<%= m.poster %>" alt="<%= m.title %>">
+              <p><%= m.title %></p>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    <% } %>
+
+  </div>
+
+  <%- include('partials/footer') %>
+
 </body>
-
 </html>
