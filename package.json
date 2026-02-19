@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "tsx app.ts",
+    "dev": "tsx watch app.ts"
   },
   "repository": {
     "type": "git",
@@ -15,8 +15,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/pg": "^8.16.0",
     "drizzle-kit": "^0.31.9",
     "ejs": "^4.0.1",
