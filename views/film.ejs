@@ -12,15 +12,32 @@
   <%- include('partials/header') %>
   <h1>Movies</h1>
 </main>
+<!-- THE FOLLOWING SECTION IS A DEMO OF HOW TO USE THE DATA -->
+<!-- Demo Object:
+{
+  "id": 1236153,
+  "title": "Mercy",
+  "poster": "https://image.tmdb.org/t/p/w500/pyok1kZJCfyuFapYXzHcy7BLlQa.jpg",
+  "rating": 6.8,
+  "releaseDate": "2026-01-20",
+  "description": "In the near future, a detective stands on trial accused of murdering his wife. He has ninety minutes..."
+}
+-->
+  <h1><%= movie.title %></h1>
+  <p><%= movie.overview %></p>
+  <img src="https://image.tmdb.org/t/p/w500<%= movie.poster_path %>" alt="Poster">
+  <ul>
+    <li>Release Date: <%= movie.release_date %></li>
+    <li>Rating: <%= movie.vote_average %></li>
+  </ul>
+<!-- END OF DEMO -->
 
   <div class="film-hero">
-    <img src="<%= movie.poster %>" class="film-poster" alt="<%= movie.title %>" />
+    <img src="https://image.tmdb.org/t/p/w500<%= movie.poster_path %>" class="film-poster" alt="<%= movie.title %> Poster" />
     <div class="film-details">
       <h1><%= movie.title %></h1>
       <p class="film-meta">
-        <span><%= movie.year %></span>
-        <% if (movie.director) { %><span><%= movie.director %></span><% } %>
-        <% if (movie.runtime) { %><span><%= movie.runtime %> min</span><% } %>
+        <%= movie.overview %>>
       </p>
       <% if (movie.genres) { %>
         <div class="genre-tags">

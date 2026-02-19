@@ -41,4 +41,4 @@ async function getMovies(category) {
     }
 }
 
-console.log(getMovies("latest"));
+console.log(getMovies("popular"));
