@@ -8,7 +8,11 @@
 </head>
 <body>
 
-  <%- include('partials/header', { user: currentUser }) %>
+<main>
+    <h1>Movies</h1>
+    <%- include('partials/PopularMovies') %>
+    <%- include('partials/PopularReviews') %>
+</main>
 
   <div class="film-hero">
     <img src="<%= movie.poster %>" class="film-poster" alt="<%= movie.title %>" />
