@@ -48,7 +48,7 @@
       <div class="film-actions">
         <div class="star-rating" data-movie-id="<%= movie._id %>">
           <% for (let i = 1; i <= 5; i++) { %>
-            <span class="star <%= i <= (movie.userRating || 0) ? 'active' : '' %>" data-val="<%= i %>">★</span>
+            <span class="star <%= i <= (movie.rating || 0) ? 'active' : '' %>" data-val="<%= i %>">★</span>
           <% } %>
         </div>
         <button class="action-btn watchlist-btn">+ Watchlist</button>
@@ -63,39 +63,6 @@
   </div>
 
   <div class="film-body">
-
-    <div class="film-reviews">
-      <h2>Reviews</h2>
-      <% if (movie.reviews && movie.reviews.length) { %>
-        <div class="review-grid">
-          <% movie.reviews.forEach(review => { %>
-            <div class="review-card">
-              <div class="review-meta">
-                <a href="/profile/<%= review.user.username %>" class="reviewer-link">
-                  <img src="<%= review.user.avatar %>" class="reviewer-avatar" />
-                  <span><%= review.user.username %></span>
-                </a>
-                <span class="rating-tag">⭐ <%= review.rating %></span>
-              </div>
-              <p class="review-snippet"><%= review.text.substring(0, 150) %>...</p>
-              <button class="expand-review">Read More</button>
-              <div class="review-actions">
-                <span><%= review.likes %></span>
-                <span><%= review.comments %></span>
-              </div>
-            </div>
-          <% }) %>
-        </div>
-      <% } else { %>
-        <p class="empty-state">No reviews yet. Be the first.</p>
-      <% } %>
-
-      <div class="write-review">
-        <h3>Leave a Review</h3>
-        <textarea class="review-input" placeholder="What did you think?"></textarea>
-        <button class="cta-btn">Submit</button>
-      </div>
-    </div>
 
     <% if (movie.similar && movie.similar.length) { %>
       <div class="similar-section">
