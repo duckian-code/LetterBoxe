@@ -16,34 +16,8 @@
     <a href="/movies" class="cta-btn">Explore Films</a>
   </section>
 
-  <section class="movie-section">
-    <h2>New Releases</h2>
-    <div class="film-row">
-      <% newMovies.forEach(movie => { %>
-        <div class="film-card">
-          <img src="<%= movie.poster %>" alt="<%= movie.title %>">
-          <p><%= movie.title %></p>
-          <span class="film-year"><%= movie.year %></span>
-        </div>
-      <% }) %>
-    </div>
-  </section>
-
-  <section class="movie-section">
-    <h2>Oscar Spotlight</h2>
-    <div class="film-row">
-      <% oscarMovies.forEach(movie => { %>
-        <div class="film-card">
-          <img src="<%= movie.poster %>" alt="<%= movie.title %>">
-          <p><%= movie.title %></p>
-          <span class="award-tag">🏆 <%= movie.awards %></span>
-        </div>
-      <% }) %>
-    </div>
-  </section>
-
+  <%- include('partials/NewReleases') %>
   <%- include('partials/PopularMovies') %>
-  <%- include('partials/PopularReviews') %>
   <%- include('partials/footer') %>
 
 </body>

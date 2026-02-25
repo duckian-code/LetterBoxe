@@ -63,11 +63,11 @@ a {
     font-size: 14px;
 }
 
-.movie-section, .review-section, .film-body, .film-reviews, .similar-section {
+.movie-section, .film-body, .similar-section {
     padding: 25px 20px;
     border-bottom: 1px solid lightgray;
 }
-.movie-section h2, .review-section h2, .film-reviews h2, .similar-section h2, .profile-section h2 {
+.movie-section h2, .similar-section h2 {
     font-size: 16px;
     margin-bottom: 12px;
 }
@@ -78,17 +78,24 @@ a {
     overflow-x: auto;
 }
 .film-card {
-    flex: 0 0 100px;
+    flex: 0 0 132px;
+    width: 132px;
+    min-width: 132px;
+    max-width: 132px;
+    overflow: hidden;
 }
 .film-card img {
-    width: 100px;
-    height: 150px;
+    width: 132px;
+    height: 198px;
     object-fit: cover;
     background-color: #eee;
     border: 1px solid lightgray;
     display: block;
 }
 .film-card p {
+    display: block;
+    width: 132px;
+    max-width: 132px;
     font-size: 12px;
     margin-top: 4px;
     white-space: nowrap;
@@ -99,66 +106,6 @@ a {
     font-size: 11px;
     color: gray;
     display: block;
-}
-
-.review-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
-}
-.review-card {
-    border: 1px solid lightgray;
-    padding: 12px;
-}
-.review-meta {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-.reviewer-link {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-}
-.reviewer-avatar {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #ddd;
-}
-.review-movie-title {
-    font-size: 12px;
-    color: gray;
-}
-.review-snippet {
-    font-size: 13px;
-    color: #444;
-    line-height: 1.5;
-    margin-bottom: 8px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-.review-card.expanded .review-snippet {
-    -webkit-line-clamp: unset;
-}
-.expand-review {
-    background: none;
-    border: 1px solid lightgray;
-    padding: 3px 8px;
-    font-size: 12px;
-    cursor: pointer;
-    margin-bottom: 8px;
-}
-.review-actions {
-    display: flex;
-    gap: 10px;
-    font-size: 12px;
-    color: gray;
-    border-top: 1px solid lightgray;
-    padding-top: 6px;
 }
 
 .film-hero {
@@ -222,11 +169,7 @@ a {
     font-size: 13px;
     cursor: pointer;
 }
-.follow-btn {
-    background-color: black;
-    color: white;
-}
-.film-stats, .profile-stats {
+.film-stats {
     display: flex;
     gap: 20px;
     margin-bottom: 10px;
@@ -242,49 +185,6 @@ a {
 .stat-label {
     font-size: 11px;
     color: gray;
-}
-
-.write-review {
-    margin-top: 20px;
-    max-width: 500px;
-}
-.write-review h3 {
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-.review-input {
-    width: 100%;
-    border: 1px solid lightgray;
-    padding: 8px;
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    resize: vertical;
-    min-height: 80px;
-    margin-bottom: 8px;
-}
-
-.profile-header {
-    display: flex;
-    gap: 20px;
-    padding: 25px 20px;
-    border-bottom: 1px solid lightgray;
-}
-.profile-avatar {
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    background-color: #ddd;
-    object-fit: cover;
-}
-.profile-info h1 {
-    font-size: 20px;
-    margin-bottom: 8px;
-}
-.profile-body {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
 }
 
 .activity-feed {
@@ -323,7 +223,7 @@ a {
 }
 
 @media (max-width: 600px) {
-    .film-hero, .profile-header {
+    .film-hero {
     flex-direction: column;
 }
 }
@@ -339,7 +239,7 @@ a {
 
 .movies-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 15px;
 }
 
@@ -347,11 +247,18 @@ a {
     display: block;
     flex: none;
     width: 100%;
+    min-width: 0;
+    max-width: none;
 }
 
 .movies-grid .film-card img {
     width: 100%;
-    height: 180px;
+    height: 220px;
+}
+
+.movies-grid .film-card p {
+    width: 100%;
+    max-width: 100%;
 }
 
 .movies-grid .film-card:hover img {
@@ -415,47 +322,4 @@ a {
 
 .popular-movies__year {
     color: #5b6169;
-}
-
-.popular-reviews {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    background: #fff6ed;
-    border-radius: 12px;
-}
-
-.popular-reviews__header h2 {
-    margin: 0 0 0.25rem;
-}
-
-.popular-reviews__header p {
-    margin: 0 0 1rem;
-    color: #7a5a3a;
-}
-
-.popular-reviews__list {
-    margin: 0;
-    padding-left: 1.25rem;
-    display: grid;
-    gap: 0.75rem;
-}
-
-.popular-reviews__item {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.popular-reviews__title {
-    font-weight: 600;
-}
-
-.popular-reviews__snippet {
-    color: #5b6169;
-}
-
-.popular-reviews__author {
-    color: #7a5a3a;
-    font-weight: 600;
 }
