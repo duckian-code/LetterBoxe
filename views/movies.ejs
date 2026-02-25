@@ -10,16 +10,12 @@
 
     <%- include('partials/header') %>
 
-    <div class="movies-page">
+    <h1>Random Movies</h1>
+
+    <div class="film-row" id="movies-page">
         <h1>All Movies</h1>
         <div class="movies-grid">
-            <% movies.forEach(movie => { %>
-                <a href="/film/<%= movie._id %>" class="film-card">
-                    <img src="<%= movie.poster %>" alt="<%= movie.title %>">
-                    <p><%= movie.title %></p>
-                    <span class="film-year"><%= movie.year %></span>
-                </a>
-            <% }) %>
+                <p class="empty-state">Loading movies...</p>
         </div>
     </div>
 

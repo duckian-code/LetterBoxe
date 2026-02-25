@@ -4,7 +4,7 @@ import express from 'express';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { usersTable } from './public/db/schema.js';
+/* import { usersTable } from './public/db/schema.js'; */ 
 import {and, eq} from "drizzle-orm";
 import {
     userLikesTable,
@@ -25,9 +25,9 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded());
-app.use('/film', filmRoutes);
+/*app.use('/film', filmRoutes);
 
-app.use("/users")
+app.use("/users")*/
 
 app.get("/", (req, res) => {
     res.render("index");
