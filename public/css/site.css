@@ -166,6 +166,11 @@ a:hover {
     text-overflow: ellipsis;
 }
 
+.film-link {
+    display: block;
+    color: inherit;
+}
+
 .award-tag, .rating-tag, .film-year {
     font-size: 11px;
     color: #999;
@@ -175,6 +180,7 @@ a:hover {
 /* ── Film Hero ── */
 .film-hero {
     display: flex;
+    align-items: flex-start;
     gap: 28px;
     padding: 28px 20px;
     border-bottom: 1px solid #e0ddd8;
@@ -182,6 +188,10 @@ a:hover {
 
 .film-poster {
     width: 160px;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
     border: 1px solid #ddd;
     flex-shrink: 0;
     box-shadow: 4px 4px 0 #e0ddd8;
@@ -229,6 +239,24 @@ a:hover {
     margin-bottom: 16px;
 }
 
+.watch-providers {
+    margin-top: 8px;
+}
+
+.watch-providers h2 {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 6px;
+}
+
+.watch-providers-list {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
 .film-actions {
     display: flex;
     align-items: center;
@@ -236,16 +264,33 @@ a:hover {
     margin-bottom: 16px;
 }
 
-.star {
-    font-size: 22px;
-    color: #ddd;
-    cursor: pointer;
-    transition: color 0.15s ease, transform 0.15s ease;
+.star-rating {
+    display: flex;
+    gap: 2px;
 }
 
-.star.active, .star:hover {
+.star {
+    font-size: 28px;
+    line-height: 1;
+    position: relative;
+    display: inline-block;
+    color: #ddd;
+    cursor: default;
+    transition: color 0.15s ease;
+}
+
+.star.active {
     color: #e8a427;
-    transform: scale(1.15);
+}
+
+.star.half::before {
+    content: "★";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+    color: #e8a427;
 }
 
 .action-btn {
@@ -392,6 +437,49 @@ a:hover {
     letter-spacing: -0.02em;
 }
 
+.movies-toolbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.movies-search,
+.movies-category {
+    height: 42px;
+    border: 1px solid #d7d3cd;
+    background: #fff;
+    color: #1a1a1a;
+    font-size: 14px;
+    padding: 0 12px;
+}
+
+.movies-search {
+    flex: 1;
+    min-width: 220px;
+}
+
+.movies-search:focus,
+.movies-category:focus {
+    outline: none;
+    border-color: #e8a427;
+}
+
+.movies-category {
+    min-width: 210px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
 .movies-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -420,5 +508,16 @@ a:hover {
 @media (max-width: 600px) {
     .film-hero {
         flex-direction: column;
+    }
+
+    .movies-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .movies-search,
+    .movies-category {
+        width: 100%;
+        min-width: 0;
     }
 }

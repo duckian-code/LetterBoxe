@@ -43,13 +43,10 @@
             <span class="star <%= i <= (movie.rating || 0) ? 'active' : '' %>" data-val="<%= i %>">★</span>
           <% } %>
         </div>
-        <button class="action-btn watchlist-btn">+ Watchlist</button>
-        <button class="action-btn watched-btn">Watched</button>
       </div>
-      <div class="film-stats">
-        <div class="stat"><span class="stat-val"><%= movie.avgRating || '—' %></span><span class="stat-label">avg rating</span></div>
-        <div class="stat"><span class="stat-val"><%= movie.watchCount || 0 %></span><span class="stat-label">watched</span></div>
-        <div class="stat"><span class="stat-val"><%= movie.listCount || 0 %></span><span class="stat-label">lists</span></div>
+      <div class="watch-providers">
+        <h2>Where to Watch</h2>
+        <p class="watch-providers-list">Loading availability...</p>
       </div>
     </div>
   </div>

@@ -10,14 +10,29 @@
 
     <%- include('partials/header') %>
 
-    <h1>Random Movies</h1>
+    <section class="movies-page" id="movies-page">
+        <div class="movies-toolbar">
+            <label for="movie-search" class="visually-hidden">Search movies</label>
+            <input
+                id="movie-search"
+                class="movies-search"
+                type="search"
+                placeholder="Search movies..."
+                autocomplete="off"
+            />
 
-    <div class="film-row" id="movies-page">
-        <h1>All Movies</h1>
-        <div class="movies-grid">
-                <p class="empty-state">Loading movies...</p>
+            <label for="movie-category" class="visually-hidden">Browse by category</label>
+            <select id="movie-category" class="movies-category" aria-label="Browse by category">
+                <option value="all">Browse by category</option>
+            </select>
         </div>
-    </div>
+
+        <h1>All Movies</h1>
+
+        <div class="movies-grid" id="movies-grid">
+            <p class="empty-state">Loading movies...</p>
+        </div>
+    </section>
 
     <%- include('partials/footer') %>
 
