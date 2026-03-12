@@ -11,6 +11,7 @@ import {
     userWatchlistTable,
     userWatchedTable,
 } from "./public/db/schema.js";
+import filmRoutes from "./routes/filmRoutes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
