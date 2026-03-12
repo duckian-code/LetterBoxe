@@ -53,19 +53,55 @@
 
   <div class="film-body">
 
-    <% if (movie.similar && movie.similar.length) { %>
-      <div class="similar-section">
-        <h2>More Like This</h2>
-        <div class="film-row">
-          <% movie.similar.forEach(m => { %>
-            <div class="film-card">
-              <img src="<%= m.poster %>" alt="<%= m.title %>">
-              <p><%= m.title %></p>
-            </div>
-          <% }) %>
-        </div>
+    <div class="similar-section">
+      <h2>More Like This</h2>
+      <div class="movies-toolbar" id="similar-filters">
+        <label for="similar-genre-filter" class="visually-hidden">Filter similar movies by genre</label>
+        <select id="similar-genre-filter" class="movies-category" aria-label="Filter similar movies by genre">
+          <option value="shared">Shares a genre</option>
+          <option value="all">All genres</option>
+        </select>
+
+        <label for="similar-min-rating" class="visually-hidden">Minimum rating</label>
+        <input
+          id="similar-min-rating"
+          class="movies-search"
+          type="number"
+          min="0"
+          max="10"
+          step="0.1"
+          placeholder="Min rating (0-10)"
+        />
+
+        <label for="similar-year-from" class="visually-hidden">Release year from</label>
+        <input
+          id="similar-year-from"
+          class="movies-search"
+          type="number"
+          min="1900"
+          max="2100"
+          step="1"
+          placeholder="Year from"
+        />
+
+        <label for="similar-year-to" class="visually-hidden">Release year to</label>
+        <input
+          id="similar-year-to"
+          class="movies-search"
+          type="number"
+          min="1900"
+          max="2100"
+          step="1"
+          placeholder="Year to"
+        />
+
+        <button id="similar-filters-reset" class="action-btn" type="button">Reset</button>
       </div>
-    <% } %>
+
+      <div class="film-row" id="similar-movies-list">
+        <p class="empty-state">Loading similar movies...</p>
+      </div>
+    </div>
 
   </div>
 

@@ -206,6 +206,34 @@ function renderPopularMovies(container, movies) {
     renderFilmRow(container, movies, (movie) => getReleaseYear(movie.releaseDate));
 }
 
+function getMovieYear(movie) {
+    const year = Number.parseInt((movie.releaseDate || "").slice(0, 4), 10);
+    return Number.isNaN(year) ? null : year;
+}
+
+function getGenreName(genreId) {
+    return MOVIE_GENRES[genreId] || `Genre ${genreId}`;
+}
+
+function populateSimilarGenreFilterOptions(selectElement, movies) {
+    if (!selectElement) {
+        return;
+    }
+
+    const genreIds = new Set();
+    movies.forEach((movie) => {
+        movie.genreIds.forEach((genreId) => genreIds.add(genreId));
+    });
+
+    [...genreIds].sort((a, b) => getGenreName(a).localeCompare(getGenreName(b))).forEach((genreId) => {
+        if (selectElement.querySelector(`option[value="${genreId}"]`)) return;
+        const option = document.createElement("option");
+        option.value = String(genreId);
+        option.textContent = getGenreName(genreId);
+        selectElement.append(option);
+    });
+}
+
 function setupMoviesPageFilters() {
     const moviesGrid = document.querySelector("#movies-grid");
     const searchInput = document.querySelector("#movie-search");
@@ -369,10 +397,97 @@ async function populateRandomMovieDetails() {
             ).join("");
         }
 
-        const similarContainer = document.querySelector(".film-row");
-        if (similarContainer && movie.similar) {
-            renderFilmRow(similarContainer, movie.similar.results.slice(0, 5).map(toMovie), (m) => getReleaseYear(m.releaseDate));
+        const similarContainer = document.querySelector("#similar-movies-list");
+        const similarGenreFilter = document.querySelector("#similar-genre-filter");
+        const similarMinRatingInput = document.querySelector("#similar-min-rating");
+        const similarYearFromInput = document.querySelector("#similar-year-from");
+        const similarYearToInput = document.querySelector("#similar-year-to");
+        const resetSimilarFiltersButton = document.querySelector("#similar-filters-reset");
+
+        const allSimilarMovies = Array.isArray(movie.similar?.results)
+            ? movie.similar.results.map(toMovie)
+            : [];
+
+        const selectedMovieGenreIds = new Set(
+            Array.isArray(movie.genres) ? movie.genres.map((genre) => genre.id) : []
+        );
+
+        if (similarGenreFilter) {
+            populateSimilarGenreFilterOptions(similarGenreFilter, allSimilarMovies);
+            similarGenreFilter.value = selectedMovieGenreIds.size ? "shared" : "all";
         }
+
+        const applySimilarFilters = () => {
+            if (!similarContainer) {
+                return;
+            }
+
+            const selectedGenre = similarGenreFilter ? similarGenreFilter.value : "all";
+            const minRating = Number.parseFloat(similarMinRatingInput ? similarMinRatingInput.value : "");
+            const yearFrom = Number.parseInt(similarYearFromInput ? similarYearFromInput.value : "", 10);
+            const yearTo = Number.parseInt(similarYearToInput ? similarYearToInput.value : "", 10);
+
+            const filteredMovies = allSimilarMovies.filter((similarMovie) => {
+                if (selectedGenre === "shared" && selectedMovieGenreIds.size > 0) {
+                    const sharesGenre = similarMovie.genreIds.some((genreId) => selectedMovieGenreIds.has(genreId));
+                    if (!sharesGenre) return false;
+                } else if (selectedGenre !== "all") {
+                    const requiredGenreId = Number.parseInt(selectedGenre, 10);
+                    if (!similarMovie.genreIds.includes(requiredGenreId)) return false;
+                }
+
+                if (!Number.isNaN(minRating) && similarMovie.voteAverage < minRating) {
+                    return false;
+                }
+
+                const releaseYear = getMovieYear(similarMovie);
+                if (!Number.isNaN(yearFrom) && (releaseYear === null || releaseYear < yearFrom)) {
+                    return false;
+                }
+                if (!Number.isNaN(yearTo) && (releaseYear === null || releaseYear > yearTo)) {
+                    return false;
+                }
+
+                return true;
+            }).slice(0, DEFAULT_MOVIE_LIMIT);
+
+            renderFilmRow(
+                similarContainer,
+                filteredMovies,
+                (similarMovie) =>
+                    `${getReleaseYear(similarMovie.releaseDate)} • ${Number(similarMovie.voteAverage || 0).toFixed(1)}/10`
+            );
+        };
+
+        if (similarGenreFilter) {
+            similarGenreFilter.addEventListener("change", applySimilarFilters);
+        }
+
+        [similarMinRatingInput, similarYearFromInput, similarYearToInput].forEach((input) => {
+            if (input) {
+                input.addEventListener("input", applySimilarFilters);
+            }
+        });
+
+        if (resetSimilarFiltersButton) {
+            resetSimilarFiltersButton.addEventListener("click", () => {
+                if (similarGenreFilter) {
+                    similarGenreFilter.value = selectedMovieGenreIds.size ? "shared" : "all";
+                }
+                if (similarMinRatingInput) {
+                    similarMinRatingInput.value = "";
+                }
+                if (similarYearFromInput) {
+                    similarYearFromInput.value = "";
+                }
+                if (similarYearToInput) {
+                    similarYearToInput.value = "";
+                }
+                applySimilarFilters();
+            });
+        }
+
+        applySimilarFilters();
 
 
         const stars = document.querySelectorAll(".star-rating .star");
